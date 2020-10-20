@@ -20,6 +20,7 @@ public class GoalFragment extends Fragment {
 
 	private String requestKey;
 	private GoalScorer goalScorer;
+	FragmentGoalBinding binding;
 
 	public GoalFragment() {
 		// Required empty public constructor
@@ -34,19 +35,20 @@ public class GoalFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		FragmentGoalBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goal,container,false);
+		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_goal, container, false);
 		binding.setGoal(this);
-		binding.setScrorer(goalScorer);
-		requestKey=GoalFragmentArgs.fromBundle(getArguments()).getRequestKey();
+		binding.setScore(goalScorer);
+		requestKey = GoalFragmentArgs.fromBundle(getArguments()).getRequestKey();
 		return binding.getRoot();
 	}
 
 	public void onSaveClicked(View view) {
+		goalScorer.setName(binding.inputName.getText().toString());
+		goalScorer.setMinute(Integer.valueOf(binding.inputMinute.getText().toString()));
 		Bundle bundle = new Bundle();
-		bundle.putParcelable(ScoreFragment.SCORER_KEY,goalScorer);
+		bundle.putParcelable(ScoreFragment.SCORER_KEY, goalScorer);
 		getParentFragmentManager().setFragmentResult(requestKey, bundle);
 		Navigation.findNavController(view).navigateUp();
-
 	}
 
 	public void onCancelClicked(View view) {

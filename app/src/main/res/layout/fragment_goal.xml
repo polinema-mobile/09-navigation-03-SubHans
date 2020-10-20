@@ -9,11 +9,9 @@
 		<variable
 			name="goal"
 			type="id.ac.polinema.skor.fragments.GoalFragment" />
-
 		<variable
-			name="scrorer"
+			name="score"
 			type="id.ac.polinema.skor.models.GoalScorer" />
-
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +50,6 @@
 			android:layout_height="wrap_content"
 			android:ems="10"
 			android:inputType="textPersonName"
-			android:text="@={scrorer.name}"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="@+id/guideline2"
 			app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +59,6 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:ems="10"
-			android:text="@={`` + scrorer.minute}"
 			android:inputType="numberSigned"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="@+id/guideline2"

@@ -44,10 +44,12 @@ public class ScoreFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		FragmentScoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score, container, false);
+		final FragmentScoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score,  container, false);
 		binding.setScore(this);
 		binding.setHome(homeGoalScorerList);
 		binding.setAway(awayGoalScorerList);
+
+
 		getParentFragmentManager().setFragmentResultListener(HOME_REQUEST_KEY, this, new FragmentResultListener() {
 			@Override
 			public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -63,40 +65,37 @@ public class ScoreFragment extends Fragment {
 				awayGoalScorerList.add(goalScorer);
 			}
 		});
+
 		return binding.getRoot();
 	}
 
 	public void onAddHomeClick(View view) {
 		ScoreFragmentDirections.GoalScorerAction action = ScoreFragmentDirections.goalScorerAction(HOME_REQUEST_KEY);
 		Navigation.findNavController(view).navigate(action);
-
 	}
 
 	public void onAddAwayClick(View view) {
 		ScoreFragmentDirections.GoalScorerAction action = ScoreFragmentDirections.goalScorerAction(AWAY_REQUEST_KEY);
 		Navigation.findNavController(view).navigate(action);
-
 	}
-	public String getHomeScorer() {
-		StringBuilder result = new StringBuilder();
-		for (GoalScorer g : homeGoalScorerList) {
-			result.append(g.getName())
-					.append(" ")
-					.append(g.getMinute())
-					.append("\" ");
+
+	public String getDataHome(){
+		StringBuffer hasil = new StringBuffer();
+		for (int cetak=0; cetak<homeGoalScorerList.size(); cetak++){
+
+			hasil.append(homeGoalScorerList.get(cetak).toString());
 		}
-		return result.toString();
+
+		return hasil.toString();
 	}
 
-	public String getAwayScorer() {
-		StringBuilder result = new StringBuilder();
-		for (GoalScorer g : awayGoalScorerList) {
-			result.append(g.getName())
-					.append(" ")
-					.append(g.getMinute())
-					.append("\" ");
+	public String getDataAway() {
+		StringBuffer hasil = new StringBuffer();
+		for (int cetak=0; cetak<awayGoalScorerList.size(); cetak++){
+
+			hasil.append(awayGoalScorerList.get(cetak).toString());
 		}
-		return result.toString();
-	}
 
+		return hasil.toString();
+	}
 }
